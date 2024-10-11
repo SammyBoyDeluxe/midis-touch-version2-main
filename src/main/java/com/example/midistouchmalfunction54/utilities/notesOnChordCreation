@@ -1,0 +1,53 @@
+/*What do we do?
+
+-> Add childeventlistener on songs since we want to track dynamic changes in list
+    This is how we get the tones in the next chord
+    We try to take a perfect third, if that´s not in our scale go down halfstep.
+    Then perfect fifth, -||- ascend a half step.
+
+    The next chord is generated looking at chord progressions. This tells us where
+    the next basenote lies. From this we use the conventional way to get the actual
+    chord notes.
+
+    Mode major chord progressions
+    1 0-3-4-0 -> Distances from basetone, changes in chords for chord progression
+    2 0-4-5-3
+    3 0-5-3-4
+    4 1-4-0-0
+    5 0-4-3-0
+   A scale has notes. Those notes each have a corresponding chord.
+   Each of those chords has to be comprised of notes from the scale (-> Movement if not in scale)
+
+
+
+        b/t = bpm => 4*numberOfBars / t = bpm
+
+       4*numberOfBars/ bpm = t (minutes)
+
+        We get a key and a mode (major), from this we obtain our origin point via the key
+        and then the movement distances from that origin point from the mode.
+
+        C  D E F G A B
+        Check if you can go 4 steps and land on a scale note if not you
+        descend 1. Then check from OP and try and go 7 steps, if ascend 1 step.
+
+       Major Mode: OP+2+2+1+2+2+2*
+
+       1) OP (Key) -> Scale is obtained from *. C-D-E-F-G-A-B
+       2) I try to take a +4-note from OP, if that´s not in the scale I take OP+3 instead
+       3)I try to go +7 from OP. If that´s not in scale (op +7 is not part of (scale as midinumbers)) ascend 1
+       <=> op + 8
+       4)Use chord progression with basenote as originpoint
+       op + 3 -> New base tone
+       (op+3) +4 if() -> 4|3 (op+7)
+       (op+3) + 7 if () ->
+        over and over til filled all bars
+
+
+      Melody: Take key
+      Make scale (same mode as ChordTrack)
+      opForChordTrack + 12 = op
+      Randomizer with interval (0,12)
+      op + rand -> Some MIDI-index -> Must be contained in scale
+      Generate 4 singular such tones for 1 bar
+     */
